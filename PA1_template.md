@@ -3,6 +3,7 @@
 ## Loading and preprocessing the data
 
 
+
 ```r
 df <- read.csv(unzip("activity.zip", "activity.csv"), colClasses=c("numeric", "Date","numeric"))
 ```
@@ -27,7 +28,7 @@ day.totals <- df %>%
 hist(day.totals$total, xlab="Number of steps", main="Histogram of total steps per day", breaks=8)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
 
 
 ```r
@@ -35,7 +36,7 @@ mean.perday <- mean(day.totals$total)
 median.perday <- median(day.totals$total)
 ```
 
-The mean total number of steps per day is 9354.23 and the median 1.0395\times 10^{4} stes per day. 
+The mean total number of steps per day is 9354.23 and the median 10395 stes per day. 
 
 
 ## What is the average daily activity pattern?
@@ -50,7 +51,7 @@ plot(intervals$interval, intervals$average, type="l",
 xlab="Interval", ylab="Number of steps", main="Average number of steps in interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
 ```r
 max.interval <- intervals[which.max(intervals$average),1]
@@ -92,7 +93,7 @@ day.totals.new <- df.new%>%
 hist(day.totals.new$total, xlab="Number of steps", main="Histogram of total steps per day", breaks=8)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
 The histogram is exactly the same as the previous one, since the imputed days now have a total of 1141 as opposed to zero and hence fall into the first bin in both instances. 
 
 ```r
@@ -100,7 +101,7 @@ mean.perday.new <- mean(day.totals.new$total)
 median.perday.new <- median(day.totals.new$total)
 ```
 
-The mean total number of steps per day is 9503.87 and the median 1.0395\times 10^{4} stes per day. The mean is therefore slightly higher than before the imputation, while the median has stayed the same. 
+The mean total number of steps per day is 9503.87 and the median 10395 stes per day. The mean is therefore slightly higher than before the imputation, while the median has stayed the same. 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -123,18 +124,18 @@ weekend <- filter(days, weekday == "weekend")
 not.weekend <- filter(days, weekday == "weekday")
 ```
 
-Then Plot them both:
+Then plot them both:
 
 ```r
 par(mfrow=c(2,1),
     mar=c(2.1, 5.1, 2.1, 1.1))
-plot(weekend[,1][[1]], weekend[,3] [[1]], type="l", ylab="Weekend", main="Average number of steps per interval")
+plot(weekend[,1][[1]], weekend[,3] [[1]], type="l", ylab="Weekend", main="Average number of steps per interval", ylim=c(0,200))
   par( mar=c(4.1, 5.1, 0, 1.1))
 plot(not.weekend[,1][[1]], not.weekend[,3] [[1]], type="l", ylab="Weekday", 
-xlab="Interval")
+xlab="Interval", ylim=c(0,200))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
 
 
 

@@ -6,6 +6,10 @@ output:
 ---
 
 ## Loading and preprocessing the data
+```{r, echo=FALSE}
+options(scipen=999)
+
+```
 
 ```{r}
 df <- read.csv(unzip("activity.zip", "activity.csv"), colClasses=c("numeric", "Date","numeric"))
@@ -34,7 +38,7 @@ mean.perday <- mean(day.totals$total)
 median.perday <- median(day.totals$total)
 ```
 
-The mean total number of steps per day is `r round(mean.perday,2)` and the median `r round(median.perday,2)` stes per day. 
+The mean total number of steps per day is `r round(mean.perday,2)` and the median `r median.perday` stes per day. 
 
 
 ## What is the average daily activity pattern?
@@ -115,10 +119,10 @@ Then plot them both:
 ```{r}
 par(mfrow=c(2,1),
     mar=c(2.1, 5.1, 2.1, 1.1))
-plot(weekend[,1][[1]], weekend[,3] [[1]], type="l", ylab="Weekend", main="Average number of steps per interval")
+plot(weekend[,1][[1]], weekend[,3] [[1]], type="l", ylab="Weekend", main="Average number of steps per interval", ylim=c(0,200))
   par( mar=c(4.1, 5.1, 0, 1.1))
 plot(not.weekend[,1][[1]], not.weekend[,3] [[1]], type="l", ylab="Weekday", 
-xlab="Interval")
+xlab="Interval", ylim=c(0,200))
 ```
 
 
